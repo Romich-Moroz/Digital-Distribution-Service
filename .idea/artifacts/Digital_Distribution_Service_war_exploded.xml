@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Digital Distribution Service:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Digital_Distribution_Service_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Digital Distribution Service/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Digital Distribution Service" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
