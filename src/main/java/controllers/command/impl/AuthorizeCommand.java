@@ -23,8 +23,7 @@ public class AuthorizeCommand implements Command {
         String login = request.getParameter(REQUEST_PARAMETER_LOGIN);
         String password = request.getParameter(REQUEST_PARAMETER_PASSWORD);
 
-        ServiceFactory factory = ServiceFactory.getInstance();
-        UserService service = factory.getUserService();
+        UserService service = ServiceFactory.getInstance().getUserService();
         HttpSession session = request.getSession(true);
 
         try {

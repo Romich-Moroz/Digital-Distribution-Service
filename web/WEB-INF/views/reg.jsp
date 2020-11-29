@@ -5,6 +5,8 @@
     <title>Register</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+
     <c:if test="${param.message == 'regexception'}">
         <h2>Internal error occurred: try again later</h2>
     </c:if>
@@ -24,5 +26,7 @@
         </label>
         <button type="submit">Submit</button>
     </form>
+
+    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
 </body>
 </html>

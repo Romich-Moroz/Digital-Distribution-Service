@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 public class Game implements Serializable {
     private int id;
-    private int idDeveloper;
+    private Genre genre;
+    private Developer developer;
     private String name;
+    private String description;
     private float price;
 
     public int getId() {
@@ -16,12 +18,20 @@ public class Game implements Serializable {
         this.id = id;
     }
 
-    public int getIdDeveloper() {
-        return idDeveloper;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setIdDeveloper(int idDeveloper) {
-        this.idDeveloper = idDeveloper;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Developer getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
     }
 
     public String getName() {
@@ -32,11 +42,28 @@ public class Game implements Serializable {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public float getPrice() {
         return price;
     }
 
     public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Game(int id, Genre genre, Developer developer, String name, String description, float price) {
+        this.id = id;
+        this.genre = genre;
+        this.developer = developer;
+        this.name = name;
+        this.description = description;
         this.price = price;
     }
 
@@ -46,7 +73,9 @@ public class Game implements Serializable {
         int hash = 1;
         hash = prime * hash + ((name == null) ? 0 : name.hashCode());
         hash = prime * hash + id;
-        hash = prime * hash + idDeveloper;
+        hash = prime * hash + (genre == null ? 0 : genre.hashCode());
+        hash = prime * hash + (description == null ? 0 : description.hashCode());
+        hash = prime * hash + (developer == null ? 0 : developer.hashCode());
         hash = prime * hash + (int)price;
         return hash;
     }
@@ -55,14 +84,14 @@ public class Game implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Game) {
             Game inst = (Game)obj;
-            return inst.id == id && inst.idDeveloper == idDeveloper && inst.name.equals(name) && inst.price == price;
+            return inst.id == id && inst.developer.equals(developer) && inst.description.equals(description) && inst.name.equals(name) && inst.price == price && inst.genre.equals(genre);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "Game [id =" + id + ", idDeveloper = " + idDeveloper + ", name = " + name + ", price = " + price + "]";
+        return "Game [id =" + id + ", genre = " + genre.toString() + ", developer = " + developer.toString() + ", name = " + name + ", price = " + price + "]";
     }
 
 }

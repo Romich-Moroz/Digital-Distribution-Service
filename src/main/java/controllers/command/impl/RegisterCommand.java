@@ -23,8 +23,7 @@ public class RegisterCommand implements Command {
         String password = request.getParameter(REQUEST_PARAMETER_PASSWORD);
         String email = request.getParameter(REQUEST_PARAMETER_EMAIL);
 
-        ServiceFactory factory = ServiceFactory.getInstance();
-        UserService service = factory.getUserService();
+        UserService service = ServiceFactory.getInstance().getUserService();
 
         try {
             service.registration(login,email,password);

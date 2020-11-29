@@ -5,6 +5,7 @@
     <title>Authorization</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
     <c:if test="${param.message == 'logexception'}">
         <h2>Internal error occurred: try again later</h2>
@@ -23,5 +24,7 @@
         <button type="submit">Submit</button>
     </form>
     <button onclick="location.href='controller?command=regredirect'">Register</button>
+
+    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
 </body>
 </html>

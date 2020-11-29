@@ -1,6 +1,5 @@
 package controllers.command;
 
-import java.util.Map;
 import java.util.HashMap;
 
 import controllers.command.impl.*;
@@ -16,6 +15,7 @@ public class CommandProvider {
         commands.put("regredirect", new RegRedirect());
         commands.put("mainredirect", new MainRedirect());
         commands.put("logout", new LogoutCommand());
+        commands.put("cateditredirect", new CatalogEditorRedirectCommand());
     }
 
     public Command getCommand(String commandName) {

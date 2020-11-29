@@ -8,12 +8,14 @@
   </head>
   <body>
     <!-- header & navigation -->
-    <jsp:include page="/views/templates/header.jsp" />
+    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
     <!-- list of games -->
     <div>
 
     </div>
-    To be continued...
+
+    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+
   </body>
 </html>

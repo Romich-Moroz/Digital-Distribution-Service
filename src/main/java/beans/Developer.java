@@ -22,6 +22,10 @@ public class Developer implements Serializable {
         this.name = name;
     }
 
+    public Developer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;

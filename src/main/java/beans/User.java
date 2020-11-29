@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int id;
-    private int idAccess;
+    private AccessType access;
     private String login;
     private String email;
     private String password;
@@ -18,13 +18,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public int getIdAccess() {
-        return idAccess;
+    public AccessType getAccess() {
+        return access;
     }
 
-    public void setIdAccess(int idAccess) {
-        this.idAccess = idAccess;
-    }
+    public void setAccess(AccessType access) { this.access = access; }
 
     public String getLogin() {
         return login;
@@ -50,9 +48,9 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(int id, int idAccess, String login, String email, String password) {
+    public User(int id, AccessType access, String login, String email, String password) {
         this.id = id;
-        this.idAccess = idAccess;
+        this.access = access;
         this.login = login;
         this.email = email;
         this.password = password;
@@ -64,7 +62,7 @@ public class User implements Serializable {
         int hash = 1;
         hash = prime * hash + ((login == null) ? 0 : login.hashCode());
         hash = prime * hash + id;
-        hash = prime * hash + idAccess;
+        hash = prime * hash + ((access == null) ? 0 : access.hashCode());
         hash = prime * hash + ((password == null) ? 0 : password.hashCode());
         hash = prime * hash + ((email == null) ? 0 : email.hashCode());
         return hash;
@@ -74,14 +72,14 @@ public class User implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof User) {
             User inst = (User)obj;
-            return inst.id == id && inst.idAccess == idAccess && inst.login.equals(login) && inst.password.equals(password) && inst.email.equals(email);
+            return inst.id == id && inst.access.equals(access) && inst.login.equals(login) && inst.password.equals(password) && inst.email.equals(email);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "User [id =" + id + ", idAccess = " + idAccess + ", login = " + login + ", email = " + email + ", password = " + password  + "]";
+        return "User [id =" + id + ", access = " + access.toString() + ", login = " + login + ", email = " + email + ", password = " + password  + "]";
     }
 
 }

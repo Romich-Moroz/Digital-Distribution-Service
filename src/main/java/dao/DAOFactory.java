@@ -16,4 +16,8 @@ public class DAOFactory {
     public UserDAO getUserDAO() {
         return sqlUserImpl;
     }
+
+    public  GameDAO getGameDAO() {
+        return sqlGameImpl;
+    }
 }

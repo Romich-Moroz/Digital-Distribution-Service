@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class AccessType implements Serializable {
     private int id;
-    private String accessType;
+    private String type;
 
     public int getId() {
         return id;
@@ -14,19 +14,24 @@ public class AccessType implements Serializable {
         this.id = id;
     }
 
-    public String getAccessType() {
-        return accessType;
+    public String getType() {
+        return type;
     }
 
-    public void setAccessType(String accessType) {
-        this.accessType = accessType;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public AccessType(int id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
     @Override
     public int hashCode() {
         final int prime = 79;
         int hash = 1;
-        hash = prime * hash + ((accessType == null) ? 0 : accessType.hashCode());
+        hash = prime * hash + ((type == null) ? 0 : type.hashCode());
         hash = prime * hash + id;
         return hash;
     }
@@ -35,14 +40,14 @@ public class AccessType implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof AccessType) {
             AccessType inst = (AccessType)obj;
-            return inst.id == id && inst.accessType.equals(accessType);
+            return inst.id == id && inst.type.equals(type);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "AccessType [id =" + id + ", accessType = " + accessType + "]";
+        return "AccessType [id =" + id + ", type = " + type + "]";
     }
 
 }
