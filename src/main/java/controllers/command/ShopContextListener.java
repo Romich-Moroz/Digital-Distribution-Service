@@ -4,7 +4,6 @@ import dao.impl.connection.ConnectionPool;
 import dao.impl.connection.ConnectionPoolException;
 import services.ServiceFactory;
 import services.UserService;
-import services.exceptions.ServiceException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Developer implements Serializable {
     private int id;
-    private String name;
+    private String developer;
 
     public int getId() {
         return id;
@@ -14,23 +14,23 @@ public class Developer implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDeveloper() {
+        return developer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDeveloper(String developer) {
+        this.developer = developer;
     }
 
-    public Developer(int id, String name) {
+    public Developer(int id, String developer) {
         this.id = id;
-        this.name = name;
+        this.developer = developer;
     }
     @Override
     public int hashCode() {
         final int prime = 31;
         int hash = 1;
-        hash = prime * hash + ((name == null) ? 0 : name.hashCode());
+        hash = prime * hash + ((developer == null) ? 0 : developer.hashCode());
         hash = prime * hash + id;
         return hash;
     }
@@ -39,14 +39,14 @@ public class Developer implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Developer) {
             Developer inst = (Developer)obj;
-            return inst.id == id && inst.name.equals(name);
+            return inst.id == id && inst.developer.equals(developer);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "Developer [id =" + id + ", name = " + name + "]";
+        return "Developer [id =" + id + ", developer = " + developer + "]";
     }
 
 }

@@ -4,7 +4,7 @@ import controllers.command.Command;
 import services.exceptions.ServiceException;
 import services.ServiceFactory;
 import services.UserService;
-import services.exceptions.ServiceUserAlreadyExistsException;
+import services.exceptions.ServiceAlreadyExistsException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ public class RegisterCommand implements Command {
             service.registration(login,email,password);
             response.sendRedirect(REDIRECT_COMMAND_SUCCESS);
         }
-        catch (ServiceUserAlreadyExistsException e) {
+        catch (ServiceAlreadyExistsException e) {
             response.sendRedirect(REDIRECT_COMMAND_EXISTS);
         } catch (ServiceException e) {
             response.sendRedirect(REDIRECT_COMMAND_EXCEPTION);

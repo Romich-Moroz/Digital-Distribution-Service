@@ -4,7 +4,7 @@ import beans.AccessType;
 import dao.exceptions.DAOException;
 import dao.UserDAO;
 import beans.User;
-import dao.exceptions.DAOExistsException;
+import dao.exceptions.DAOAlreadyExistsException;
 import dao.exceptions.DAOInvalidDataException;
 import dao.impl.connection.ConnectionPool;
 import dao.impl.connection.ConnectionPoolException;
@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class userDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     private static final String TBL_COLUMN_ID_USER = "idUser";
     private static final String TBL_COLUMN_ID_ACCESS = "idAccess";
     private static final String TBL_COLUMN_ACCESS_TYPE = "accesstype";
@@ -101,7 +101,7 @@ public class userDAOImpl implements UserDAO {
         } catch (ConnectionPoolException e) {
             throw new DAOException("Error in Connection pool while adding new User", e);
         } catch (SQLException e) {
-            throw new DAOExistsException("Error while adding new User", e);
+            throw new DAOAlreadyExistsException("Error while adding new User", e);
         } finally {
             connectionPool.returnConnection(con);
         }

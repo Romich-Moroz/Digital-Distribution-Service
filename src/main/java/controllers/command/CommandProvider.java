@@ -16,6 +16,10 @@ public class CommandProvider {
         commands.put("mainredirect", new MainRedirect());
         commands.put("logout", new LogoutCommand());
         commands.put("cateditredirect", new CatalogEditorRedirectCommand());
+        commands.put("deletegame", new DeleteGameCommand());
+        commands.put("addgame", new AddGameCommand());
+        commands.put("editgame", new EditGameCommand());
+        commands.put("addKeys", new AddKeysCommand());
     }
 
     public Command getCommand(String commandName) {

@@ -4,12 +4,12 @@ import beans.User;
 import dao.exceptions.DAOException;
 import dao.DAOFactory;
 import dao.UserDAO;
-import dao.exceptions.DAOExistsException;
+import dao.exceptions.DAOAlreadyExistsException;
 import dao.exceptions.DAOInvalidDataException;
 import services.exceptions.ServiceException;
 import services.UserService;
 import services.exceptions.ServiceInvalidDataException;
-import services.exceptions.ServiceUserAlreadyExistsException;
+import services.exceptions.ServiceAlreadyExistsException;
 
 public class UserServiceImpl implements UserService {
 
@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 
         try {
             dao.registration(login,email,password);
-        } catch (DAOExistsException e) {
-            throw new ServiceUserAlreadyExistsException(e);
+        } catch (DAOAlreadyExistsException e) {
+            throw new ServiceAlreadyExistsException(e);
         }
         catch (DAOException e) {
             throw new ServiceException(e);
