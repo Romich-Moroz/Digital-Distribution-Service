@@ -23,6 +23,13 @@ public class CommandProvider {
         commands.put("blacklistredirect", new BlacklistRedirect());
         commands.put("addtoblacklist", new AddToBlacklistCommand());
         commands.put("removefromblacklist", new RemoveFromBlacklistCommand());
+        commands.put("storeredirect",new StoreRedirect());
+        commands.put("search",new SearchCommand());
+        commands.put("addtocart",new AddToCartCommand());
+        commands.put("cartredirect",new CartRedirect());
+        commands.put("delfromcart",new RemoveFromCartCommand());
+        commands.put("purchase",new PurchaseCommand());
+        commands.put("gamesredirect",new GamesRedirect());
     }
 
     public Command getCommand(String commandName) {

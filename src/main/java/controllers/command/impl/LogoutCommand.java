@@ -13,7 +13,9 @@ public class LogoutCommand implements Command {
     private static final String REQUEST_PARAMETER_GAMES = "gameslist";
     private static final String REQUEST_PARAMETER_GENRES = "genreslist";
     private static final String REQUEST_PARAMETER_DEVELOPERS = "developerslist";
-
+    private static final String SEARCH_SESSION_ATTRIBUTE = "searchRequest";
+    private static final String CATALOG_PAGE_SESSION_ATTRIBUTE = "catalog";
+    private static final String CART_SESSION_ATTRIBUTE = "catalog";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -21,6 +23,11 @@ public class LogoutCommand implements Command {
         session.removeAttribute(REQUEST_PARAMETER_GAMES);
         session.removeAttribute(REQUEST_PARAMETER_GENRES);
         session.removeAttribute(REQUEST_PARAMETER_DEVELOPERS);
+        session.removeAttribute(CATALOG_PAGE_SESSION_ATTRIBUTE);
+        session.removeAttribute(SEARCH_SESSION_ATTRIBUTE);
+        session.removeAttribute(CART_SESSION_ATTRIBUTE);
+
+
         response.sendRedirect(REDIRECT_COMMAND);
     }
 }

@@ -25,7 +25,7 @@ public class CatalogEditorRedirectCommand implements Command {
         DeveloperService developerService = factory.getDeveloperService();
         GenreService genreService = factory.getGenreService();
         try {
-            request.setAttribute(REQUEST_PARAMETER_GAMES,gameService.list());
+            request.setAttribute(REQUEST_PARAMETER_GAMES,gameService.list(false));
             request.setAttribute(REQUEST_PARAMETER_GENRES,genreService.list());
             request.setAttribute(REQUEST_PARAMETER_DEVELOPERS,developerService.list());
         }

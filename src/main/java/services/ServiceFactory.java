@@ -12,6 +12,7 @@ public final class ServiceFactory {
     private final DeveloperService developerService = new DeveloperServiceImpl();
     private final GameCopyService gameCopyService = new GameCopyServiceImpl();
     private final BlacklistService blacklistService = new BlacklistServiceImpl();
+    private final OwnershipService ownershipService = new OwnershipServiceImpl();
 
     public static ServiceFactory getInstance() {
         return instance;
@@ -26,4 +27,5 @@ public final class ServiceFactory {
     public DeveloperService getDeveloperService() { return developerService; }
     public GameCopyService getGameCopyService() { return gameCopyService; }
     public BlacklistService getBlacklistService() { return blacklistService; }
+    public OwnershipService getOwnershipService() { return ownershipService; }
 }

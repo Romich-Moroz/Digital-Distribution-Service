@@ -11,6 +11,7 @@ public class DAOFactory {
     private final GenreDAO sqlGenreImpl = new GenreDAOImpl();
     private final GameCopyDAO sqlGameCopyImpl = new GameCopyDAOImpl();
     private final BlacklistDAO sqlBlacklistImpl = new BlacklistDAOImpl();
+    private final OwnershipDAO sqlOwnershipImpl = new OwnershipDAOImpl();
 
     public static DAOFactory getInstance() {
         return instance;
@@ -30,4 +31,5 @@ public class DAOFactory {
         return sqlGameCopyImpl;
     }
     public BlacklistDAO getBlacklistDAO() {return sqlBlacklistImpl; }
+    public OwnershipDAO getOwnershipDAO() {return sqlOwnershipImpl; }
 }

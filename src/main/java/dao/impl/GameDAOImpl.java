@@ -30,22 +30,27 @@ public class GameDAOImpl implements GameDAO {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private static final String LIST_GAMES_SQL =    "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
+    private static final String LIST_ALL_GAMES_SQL = "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
                                                     "FROM games " +
                                                     "INNER JOIN genres ON games.idgenre=genres.id " +
                                                     "INNER JOIN developers ON games.iddeveloper=developers.id " +
                                                     "ORDER BY name";
+    private static final String LIST_SELLING_GAMES_SQL = "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
+                                                         "FROM games " +
+                                                         "INNER JOIN genres ON games.idgenre=genres.id " +
+                                                         "INNER JOIN developers ON games.iddeveloper=developers.id " +
+                                                         "WHERE games.isselling=1 ORDER BY name";
 
     private static final String FIND_GAMES_BY_DEVELOPER_SQL =   "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
                                                                 "FROM games " +
                                                                 "INNER JOIN genres ON games.idgenre=genres.id " +
                                                                 "INNER JOIN developers ON games.iddeveloper=developers.id " +
-                                                                "WHERE developers.id=? ORDER BY name";
+                                                                "WHERE developers.id=?, games.isselling=1 ORDER BY name";
     private static final String FIND_GAMES_BY_GENRE_SQL =   "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
                                                             "FROM games " +
                                                             "INNER JOIN genres ON games.idgenre=genres.id " +
                                                             "INNER JOIN developers ON games.iddeveloper=developers.id " +
-                                                            "WHERE genres.id=? ORDER BY name";
+                                                            "WHERE genres.id=?,games.isselling=1 ORDER BY name";
 
     private static final String DELETE_GAME_SQL = "DELETE FROM games WHERE id=?";
 
@@ -57,6 +62,11 @@ public class GameDAOImpl implements GameDAO {
     private static final String ADD_GAME_SQL = "INSERT INTO games (idGenre,idDeveloper,name,description,price) VALUES(?,?,?,?,?)";
 
     private static final String UPDATE_GAME_SQL = "UPDATE games SET idGenre=?,idDeveloper=?,name=?,description=?,price=?,isSelling=? WHERE games.id=?";
+    private static final String FIND_GAMES_BY_NAME_SQL = "SELECT games.id AS idGame, developers.id AS idDeveloper, genres.id AS idGenre, genre, developer, name, description, price, isSelling " +
+                                                         "FROM games " +
+                                                         "INNER JOIN genres ON games.idgenre=genres.id " +
+                                                         "INNER JOIN developers ON games.iddeveloper=developers.id " +
+                                                         "WHERE (name LIKE ?) AND games.isselling=1 ORDER BY name";
 
     @Override
     public List<Game> findByDeveloper(int idDeveloper) throws DAOException {
@@ -69,14 +79,41 @@ public class GameDAOImpl implements GameDAO {
     }
 
     @Override
-    public List<Game> list() throws DAOException {
+    public List<Game> findByName(String name) throws DAOException {
         PreparedStatement ps;
         Connection con = null;
         ResultSet rs = null;
 
         try {
             con = connectionPool.takeConnection();
-            ps = con.prepareStatement(LIST_GAMES_SQL);
+            ps = con.prepareStatement(FIND_GAMES_BY_NAME_SQL);
+            ps.setString(1,"%" +name+"%");
+
+            return getGames(ps);
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("Error in Connection pool while getting list of games", e);
+        } catch (SQLException e) {
+            throw new DAOException("Error while getting list of games", e);
+        } finally {
+            connectionPool.returnConnection(con);
+        }
+    }
+
+    @Override
+    public List<Game> list(boolean sellingOnly) throws DAOException {
+        PreparedStatement ps;
+        Connection con = null;
+        ResultSet rs = null;
+
+        try {
+            con = connectionPool.takeConnection();
+            if (sellingOnly) {
+                ps = con.prepareStatement(LIST_SELLING_GAMES_SQL);
+            }
+            else {
+                ps = con.prepareStatement(LIST_ALL_GAMES_SQL);
+            }
+
 
             return getGames(ps);
         } catch (ConnectionPoolException e) {

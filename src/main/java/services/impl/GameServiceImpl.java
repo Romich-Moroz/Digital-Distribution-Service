@@ -44,12 +44,26 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<Game> list() throws ServiceException {
+    public List<Game> list(boolean sellingOnly) throws ServiceException {
         DAOFactory factory = DAOFactory.getInstance();
         GameDAO dao = factory.getGameDAO();
 
         try {
-            return dao.list();
+            return dao.list(sellingOnly);
+        }catch (DAOInvalidDataException e){
+            throw  new ServiceInvalidDataException(e);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Game> findByName(String name) throws ServiceException {
+        DAOFactory factory = DAOFactory.getInstance();
+        GameDAO dao = factory.getGameDAO();
+
+        try {
+            return dao.findByName(name);
         }catch (DAOInvalidDataException e){
             throw  new ServiceInvalidDataException(e);
         } catch (DAOException e) {
