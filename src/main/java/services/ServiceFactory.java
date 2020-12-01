@@ -1,5 +1,6 @@
 package services;
 
+import beans.Blacklist;
 import services.impl.*;
 
 public final class ServiceFactory {
@@ -10,6 +11,7 @@ public final class ServiceFactory {
     private final GenreService genreService = new GenreServiceImpl();
     private final DeveloperService developerService = new DeveloperServiceImpl();
     private final GameCopyService gameCopyService = new GameCopyServiceImpl();
+    private final BlacklistService blacklistService = new BlacklistServiceImpl();
 
     public static ServiceFactory getInstance() {
         return instance;
@@ -23,4 +25,5 @@ public final class ServiceFactory {
     public GenreService getGenreService() { return genreService; }
     public DeveloperService getDeveloperService() { return developerService; }
     public GameCopyService getGameCopyService() { return gameCopyService; }
+    public BlacklistService getBlacklistService() { return blacklistService; }
 }

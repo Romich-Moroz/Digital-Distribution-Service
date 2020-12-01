@@ -20,6 +20,9 @@ public class CommandProvider {
         commands.put("addgame", new AddGameCommand());
         commands.put("editgame", new EditGameCommand());
         commands.put("addKeys", new AddKeysCommand());
+        commands.put("blacklistredirect", new BlacklistRedirect());
+        commands.put("addtoblacklist", new AddToBlacklistCommand());
+        commands.put("removefromblacklist", new RemoveFromBlacklistCommand());
     }
 
     public Command getCommand(String commandName) {

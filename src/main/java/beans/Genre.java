@@ -47,6 +47,6 @@ public class Genre implements Serializable {
 
     @Override
     public String toString() {
-        return "Developer [id =" + id + ", genre = " + genre + "]";
+        return "Genre [id =" + id + ", genre = " + genre + "]";
     }
 }

@@ -1,4 +1,4 @@
-<%--suppress ELValidationInJSP --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -94,8 +94,7 @@
             <br/><br/>
             Add keys to selected game:
             <label>
-                <textarea rows="10" cols="30" name="gameKeys" placeholder="Separate keys by newline"></textarea>
-                &nbsp;
+                <textarea rows="10" cols="30" name="gameKeys" placeholder="Separate keys by newline"></textarea>&nbsp;
             </label>
             <button type="submit" formaction="controller?command=addKeys">Add keys</button>
         </form>

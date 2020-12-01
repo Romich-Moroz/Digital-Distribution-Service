@@ -4,12 +4,9 @@
 
 <div>
 
-
-    <c:if test="${param.message == 'regsuccess'}">
-        <h2>Registration successful</h2>
-    </c:if>
     <c:if test="${user.access.type == 'admin'}">
         <button onclick="location.href='controller?command=cateditredirect'">Edit catalog</button>
+        <button onclick="location.href='controller?command=blacklistredirect'">Blacklist</button>
     </c:if>
     <c:choose>
         <c:when test="${user == null}">

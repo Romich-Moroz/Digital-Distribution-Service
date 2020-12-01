@@ -1,6 +1,8 @@
 package beans;
 
-public class GameCopy {
+import java.io.Serializable;
+
+public class GameCopy implements Serializable {
     private int id;
     private int idGame;
     private String key;
