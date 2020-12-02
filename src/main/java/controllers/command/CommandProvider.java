@@ -30,6 +30,7 @@ public class CommandProvider {
         commands.put("delfromcart",new RemoveFromCartCommand());
         commands.put("purchase",new PurchaseCommand());
         commands.put("gamesredirect",new GamesRedirect());
+        commands.put("changelocale",new ChangeLocaleCommand());
     }
 
     public Command getCommand(String commandName) {

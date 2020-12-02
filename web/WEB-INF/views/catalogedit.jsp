@@ -1,104 +1,139 @@
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <html>
 <head>
-    <title>Edit catalog</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <fmt:setLocale value="${sessionScope.locale}"/>
+    <fmt:setBundle basename="locale" var="loc" />
+
+    <fmt:message bundle="${loc}" key="locale.catalog.title" var="title" />
+    <fmt:message bundle="${loc}" key="locale.catalog.add" var="add" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addexc" var="addexc" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addkeysbtn" var="addkeysbtn" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addkeysexc" var="addkeysexc" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addkeyslbl" var="addkeyslbl" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addkeysplc" var="addkeysplc" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addkeyssuc" var="addkeyssuc" />
+    <fmt:message bundle="${loc}" key="locale.catalog.addsuc" var="addsuc" />
+    <fmt:message bundle="${loc}" key="locale.catalog.create" var="create" />
+    <fmt:message bundle="${loc}" key="locale.catalog.delete" var="delete" />
+    <fmt:message bundle="${loc}" key="locale.catalog.delexc" var="delexc"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.delpart" var="delpart"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.delsuc" var="delsuc"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.desc" var="desc"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.editsuc" var="editsuc"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.editexc" var="editexc"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.select" var="select"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.edit" var="edit"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.developer" var="developer"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.genre" var="genre"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.name" var="name"/>
+    <fmt:message bundle="${loc}" key="locale.catalog.price" var="price"/>
+
+    <title>${title}</title>
 </head>
 <body>
-    <!-- header & navigation -->
+
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
     <c:if test="${param.message == 'delsuccess'}">
-        <h2>Removed game from database</h2>
+        <h2>${delsuc}</h2>
     </c:if>
     <c:if test="${param.message == 'delpartsuccess'}">
-        <h2>Removed game from catalog, ownerships are not revoked</h2>
+        <h2>${delpart}</h2>
     </c:if>
     <c:if test="${param.message == 'delexception'}">
-        <h2>Failed to delete game</h2>
+        <h2>${delexc}</h2>
     </c:if>
     <c:if test="${param.message == 'addexception'}">
-        <h2>Failed to add game</h2>
+        <h2>${addexc}</h2>
     </c:if>
     <c:if test="${param.message == 'addsuccess'}">
-        <h2>Added game to database</h2>
+        <h2>${addsuc}</h2>
     </c:if>
     <c:if test="${param.message == 'editexception'}">
-        <h2>Failed to edit game</h2>
+        <h2>${editexc}</h2>
     </c:if>
     <c:if test="${param.message == 'editsuccess'}">
-        <h2>Edited a game successfully</h2>
+        <h2>${editsuc}</h2>
     </c:if>
     <c:if test="${param.message == 'addkeysexception'}">
-        <h2>Failed to add keys</h2>
+        <h2>${addkeysexc}</h2>
     </c:if>
     <c:if test="${param.message == 'addkeyssuccess'}">
-        <h2>Added keys successfully</h2>
+        <h2>${addkeyssuc}</h2>
     </c:if>
 
     <div>
         <form method="post">
             <label>
-                Select game to edit/delete:&nbsp;
+                ${select}:&nbsp;
                 <select name="games">
                     <c:forEach items="${gameslist}" var="game">
                         <option value="${game.id}">${game.name}</option>
                     </c:forEach>
                 </select>
             </label>
-            <button type="submit" formaction="controller?command=deletegame">Delete</button>
-            <br/>
-            <br/>
-            Create new/modify selected game:
-            <br/>
-            <label>
-                Developer:&nbsp;
-                <select name="developers">
-                    <c:forEach items="${developerslist}" var="developer">
-                        <option value="${developer.id}" ${game.developer.id== developer.id ?
-                        'selected' : ''}>${developer.developer}</option>
-                    </c:forEach>
-                </select>
-            </label>
-            <br/>
-            <label>
-                Genre:&nbsp;
-                <select name="genres">
-                    <c:forEach items="${genreslist}" var="genre">
-                        <option value="${genre.id}" ${game.genre.id== genre.id ?
-                        'selected' : ''}>${genre.genre}</option>
-                    </c:forEach>
-                </select>
-            </label>
-            <br/>
-            <label>
-                Name:&nbsp;
-                <input type="text" name="gameName"/>
-            </label>
-            <br/>
-            <label>
-                Description:&nbsp;
-                <input type="text" name="gameDesc"/>
-            </label>
-            <br/>
-            <label>
-                Price:&nbsp;
-                <input type="text" name="gamePrice"/>
-            </label>
-            <br/>
-
-            <br/>
-            <button type="submit" formaction="controller?command=addgame">Add</button>
-            <button type="submit" formaction="controller?command=editgame">Edit</button>
-            <br/><br/>
-            Add keys to selected game:
-            <label>
-                <textarea rows="10" cols="30" name="gameKeys" placeholder="Separate keys by newline"></textarea>&nbsp;
-            </label>
-            <button type="submit" formaction="controller?command=addKeys">Add keys</button>
+            <button type="post" formaction="controller?command=deletegame">${delete}</button>
         </form>
 
+        <form method="post">
+            ${create}
+            <select name="games">
+                <c:forEach items="${gameslist}" var="game">
+                    <option value="${game.id}">${game.name}</option>
+                </c:forEach>
+            </select><br/>
+            <label>
+                ${developer}&nbsp;
+                <select name="developers">
+                    <c:forEach items="${developerslist}" var="developer">
+                        <option value="${developer.id}">${developer.developer}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <br/>
+            <label>
+                ${genre}&nbsp;
+                <select name="genres">
+                    <c:forEach items="${genreslist}" var="genre">
+                        <option value="${genre.id}">${genre.genre}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <br/>
+            <label>
+                ${name}&nbsp;
+                <input type="text" name="gameName" required/>
+            </label>
+            <br/>
+            <label>
+                ${desc}&nbsp;
+                <input type="text" name="gameDesc" required/>
+            </label>
+            <br/>
+            <label>
+                ${price}&nbsp;
+                <input type="text" name="gamePrice" required/>
+            </label>
+            <br/>
+            <button type="submit" formaction="controller?command=addgame">${add}</button>
+            <button type="submit" formaction="controller?command=editgame">${edit}</button>
+        </form>
+
+        <form method="post">
+            ${addkeyslbl}
+            <select name="games">
+                <c:forEach items="${gameslist}" var="game">
+                    <option value="${game.id}">${game.name}</option>
+                </c:forEach>
+            </select><br/>
+            <label>
+                <textarea rows="10" cols="30" name="gameKeys" placeholder="${addkeysplc}" required></textarea>&nbsp;
+            </label><br/>
+            <button type="submit" formaction="controller?command=addKeys">${addkeysbtn}</button>
+        </form>
     </div>
 
     <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>

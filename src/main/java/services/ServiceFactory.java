@@ -1,7 +1,7 @@
 package services;
 
-import beans.Blacklist;
 import services.impl.*;
+
 
 public final class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();

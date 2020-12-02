@@ -3,6 +3,7 @@ package dao.impl;
 import beans.Developer;
 import dao.BlacklistDAO;
 import dao.exceptions.DAOException;
+import dao.exceptions.DAOForeignDependencyException;
 import dao.exceptions.DAONotFoundException;
 import dao.impl.connection.ConnectionPool;
 import dao.impl.connection.ConnectionPoolException;
@@ -32,8 +33,12 @@ public class BlacklistDAOImpl implements BlacklistDAO {
             ps = con.prepareStatement(ADD_USER_SQL);
             ps.setString(1,reason);
             ps.setString(2,login);
-            ps.executeUpdate();
+            if (ps.executeUpdate() == 0) {
+                ps.close();
+                throw new DAOForeignDependencyException("User not found");
+            }
             ps.close();
+
         } catch (ConnectionPoolException e) {
             throw new DAOException("Error in Connection pool while adding user to blacklist", e);
         } catch (SQLException e) {
@@ -52,7 +57,10 @@ public class BlacklistDAOImpl implements BlacklistDAO {
             con = connectionPool.takeConnection();
             ps = con.prepareStatement(REMOVE_USER_SQL);
             ps.setString(1,login);
-            ps.executeUpdate();
+            if (ps.executeUpdate() == 0) {
+                ps.close();
+                throw new DAOForeignDependencyException("User not found");
+            }
             ps.close();
         } catch (ConnectionPoolException e) {
             throw new DAOException("Error in Connection pool while removing user from blacklist", e);

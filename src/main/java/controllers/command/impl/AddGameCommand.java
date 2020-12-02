@@ -12,7 +12,6 @@ import java.io.IOException;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-@SuppressWarnings("DuplicatedCode")
 public class AddGameCommand implements Command {
     private static final String REQUEST_PARAMETER_GAME_NAME = "gameName";
     private static final String REQUEST_PARAMETER_GAME_DESC = "gameDesc";

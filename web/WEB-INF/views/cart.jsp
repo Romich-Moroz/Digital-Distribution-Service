@@ -1,56 +1,87 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <html>
 <head>
-    <title>Make an order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <fmt:setLocale value="${sessionScope.locale}"/>
+    <fmt:setBundle basename="locale" var="loc" />
+
+    <fmt:message bundle="${loc}" key="locale.cart.title" var="title" />
+    <fmt:message bundle="${loc}" key="locale.cart.delsuc" var="delsuc" />
+    <fmt:message bundle="${loc}" key="locale.cart.delexc" var="delexc" />
+    <fmt:message bundle="${loc}" key="locale.cart.game" var="game" />
+    <fmt:message bundle="${loc}" key="locale.cart.price" var="price" />
+    <fmt:message bundle="${loc}" key="locale.cart.remove" var="remove" />
+    <fmt:message bundle="${loc}" key="locale.cart.sum" var="sum" />
+    <fmt:message bundle="${loc}" key="locale.cart.empty" var="cartempty" />
+    <fmt:message bundle="${loc}" key="locale.cart.cardnumb" var="card" />
+    <fmt:message bundle="${loc}" key="locale.cart.holder" var="holder" />
+    <fmt:message bundle="${loc}" key="locale.cart.secnumb" var="CVV" />
+    <fmt:message bundle="${loc}" key="locale.cart.expdate" var="expdate"/>
+    <fmt:message bundle="${loc}" key="locale.cart.purchase" var="purchase"/>
+    <title>${title}</title>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
     <div>
         <c:if test="${param.message == 'delfromcartexception'}">
-            <h2>Failed to remove game from cart</h2>
+            <h2>${delexc}</h2>
         </c:if>
         <c:if test="${param.message == 'delfromcartsuccess'}">
-            <h2>Removed game to cart</h2>
+            <h2>${delsuc}</h2>
         </c:if>
 
-        <c:set var="total" value="${0}"/>
-        <c:forEach items="${cart}" var="game">
-            <div>
-                <c:out value = "${game.name} for ${game.price}$"/>
-                <c:set var="total" value="${total + game.price}" />
-                <button onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">Remove</button><br/>
-            </div>
-        </c:forEach>
-        <fmt:formatNumber var="formattedTotal" type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}" />
-        <c:out value="Total: ${formattedTotal}$"/>
+        <c:choose>
+            <c:when test="${cart != null}">
+                <c:set var="total" value="${0}"/>
+                <table>
+                    <tr>
+                        <th>${game}</th>
+                        <th>${price}</th>
+                    </tr>
+                    <c:forEach items="${cart}" var="game">
+                        <tr>
+                            <td>${game.name}</td>
+                            <td>${game.price}$</td>
+                            <td><button onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">${remove}</button></td>
+                            <c:set var="total" value="${total + game.price}" />
+                        </tr>
+                    </c:forEach>
+                </table>
+                <fmt:formatNumber var="formattedTotal" type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}" />
+                <c:out value="${sum}: ${formattedTotal}$"/>
+            </c:when>
+            <c:otherwise>
+                <c:out value="${cartempty}"/>
+            </c:otherwise>
+        </c:choose>
+
         <br/><br/>
 
         <form method="post">
             <label>
-                Card number:&nbsp;
-                <input type="text" name="cardNumb"/>
+                ${card}:&nbsp;
+                <input type="text" name="cardNumb" required/>
             </label>
             <br/>
             <label>
-                Cardholder name:&nbsp;
-                <input type="text" name="name"/>
+                ${holder}:&nbsp;
+                <input type="text" name="name" required/>
             </label>
             <br/>
             <label>
-                Issue date:&nbsp;
-                <input type="text" name="date"/>
+                ${expdate}:&nbsp;
+                <input type="text" name="date" required/>
             </label>
             <br/>
             <label>
-                Security numbers:&nbsp;
-                <input type="text" name="security"/>
+                ${CVV}:&nbsp;
+                <input type="text" name="security" required/>
             </label>
             <br/>
-            <button type="submit" formaction="controller?command=purchase">Purchase</button>
+            <button type="submit" formaction="controller?command=purchase">${purchase}</button>
         </form>
-
 
     </div>
     <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
