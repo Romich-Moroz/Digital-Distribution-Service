@@ -33,4 +33,16 @@ public class BlacklistServiceImpl implements BlacklistService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public String checkForBan(int idUser) throws ServiceException {
+        BlacklistDAO dao = DAOFactory.getInstance().getBlacklistDAO();
+        try {
+            return dao.checkForBan(idUser);
+        }catch (DAOInvalidDataException e){
+            throw  new ServiceInvalidDataException(e);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

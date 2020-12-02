@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class GameCopy implements Serializable {
     private int id;
-    private int idGame;
+    private Game game;
     private String key;
 
     public int getId() {
@@ -15,11 +15,11 @@ public class GameCopy implements Serializable {
         this.id = id;
     }
 
-    public int getIdGame() {
-        return idGame;
+    public Game getGame() {
+        return game;
     }
 
-    public void setIdGame(int idGame) { this.idGame = idGame; }
+    public void setGame(Game game) { this.game = game; }
 
     public String getKey() {
         return key;
@@ -29,9 +29,9 @@ public class GameCopy implements Serializable {
         this.key = key;
     }
 
-    public GameCopy(int id, int idGame, String key) {
+    public GameCopy(int id, Game game, String key) {
         this.id = id;
-        this.idGame = idGame;
+        this.game = game;
         this.key = key;
     }
 
@@ -41,7 +41,7 @@ public class GameCopy implements Serializable {
         int hash = 1;
         hash = prime * hash + ((key == null) ? 0 : key.hashCode());
         hash = prime * hash + id;
-        hash = prime * hash + idGame;
+        hash = prime * hash + game.hashCode();
         return hash;
     }
 
@@ -49,13 +49,13 @@ public class GameCopy implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof GameCopy) {
             GameCopy inst = (GameCopy)obj;
-            return inst.id == id && inst.idGame == idGame && inst.key.equals(key);
+            return inst.id == id && inst.game.equals(game) && inst.key.equals(key);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "GameCopy [id =" + id + ", idGame = " + idGame + ", key = " + key + "]";
+        return "GameCopy [id =" + id + ", game = " + game + ", key = " + key + "]";
     }
 }

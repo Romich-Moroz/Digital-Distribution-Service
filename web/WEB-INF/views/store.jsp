@@ -7,8 +7,6 @@
 <body>
     <!-- header & navigation -->
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
-
-
     <div>
         <c:if test="${param.message == 'addtocartexception'}">
             <h2>Failed to add game to cart</h2>

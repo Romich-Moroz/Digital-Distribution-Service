@@ -1,12 +1,12 @@
 package beans;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Ownership implements Serializable {
     private int idUser;
-    private int idGameCopy;
-    private LocalDateTime date;
+    private GameCopy gameCopy;
+    private Timestamp date;
 
     public int getIdUser() {
         return idUser;
@@ -16,24 +16,32 @@ public class Ownership implements Serializable {
         this.idUser = idUser;
     }
 
-    public int getIdGameCopy() {
-        return idGameCopy;
+    public GameCopy getGameCopy() {
+        return gameCopy;
     }
 
-    public void setIdGameCopy(int idGameCopy) {
-        this.idGameCopy = idGameCopy;
+    public void setGameCopy(GameCopy idGameCopy) {
+        this.gameCopy = gameCopy;
     }
 
-    public Ownership(int idUser, int idGameCopy) {
+    public Timestamp getTimestamp() {
+        return date;
+    }
+
+    public void setTimestamp(Timestamp date) {
+        this.date = date;
+    }
+
+    public Ownership(int idUser, GameCopy gameCopy) {
         this.idUser = idUser;
-        this.idGameCopy = idGameCopy;
+        this.gameCopy = gameCopy;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int hash = 1;
-        hash = prime * hash + idGameCopy;
+        hash = prime * hash + gameCopy.hashCode();
         hash = prime * hash + idUser;
         hash = prime * hash + ((date == null) ? 0 : date.hashCode());
         return hash;
@@ -43,13 +51,13 @@ public class Ownership implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Ownership) {
             Ownership inst = (Ownership)obj;
-            return inst.idUser == idUser && inst.idGameCopy == idGameCopy && inst.date.equals(date);
+            return inst.idUser == idUser && inst.gameCopy.equals(gameCopy) && inst.date.equals(date);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "Ownership [idUser =" + idUser + ", idGameCopy = " + idGameCopy + ", date = "+ date + "]";
+        return "Ownership [idUser =" + idUser + ", gameCopy = " + gameCopy + ", date = "+ date + "]";
     }
 }

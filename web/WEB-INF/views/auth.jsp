@@ -13,6 +13,9 @@
     <c:if test="${param.message == 'logerror'}">
         <h2>Invalid login data</h2>
     </c:if>
+    <c:if test="${param.message == 'logbanned'}">
+        <h2>This account was banned</h2>
+    </c:if>
     <form method="post" action="controller?command=authorize">
         <label>Login:
             <input type="text" name="login" required><br/>

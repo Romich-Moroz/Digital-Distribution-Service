@@ -7,7 +7,7 @@
     <button onclick="location.href='controller?command=storeredirect'">Store</button>
     <c:choose>
         <c:when test="${user != null}">
-            <button onclick="location.href='controller?command=ownedredirect'">Games</button>
+            <button onclick="location.href='controller?command=gamesredirect'">Games</button>
             <button onclick="location.href='controller?command=cartredirect'">Cart</button>
             <c:if test="${user.access.type == 'admin'}">
                 <button onclick="location.href='controller?command=cateditredirect'">Edit catalog</button>

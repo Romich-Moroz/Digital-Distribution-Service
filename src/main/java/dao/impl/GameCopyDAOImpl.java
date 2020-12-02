@@ -1,5 +1,6 @@
 package dao.impl;
 
+import beans.GameCopy;
 import dao.GameCopyDAO;
 import dao.exceptions.DAOException;
 import dao.exceptions.DAONotFoundException;
@@ -12,13 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GameCopyDAOImpl implements GameCopyDAO {
-    private static final String TBL_COLUMN_ID_COPY = "idCopy";
+    private static final String TBL_COLUMN_ID_COPY = "id";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     private static final String ADD_GAME_COPY_SQL = "INSERT INTO gamecopy (idGame,gameKey) VALUES(?,?)";
 
-    private static final String GET_AVAILABLE_COPY_ID_SQL = "SELECT id as idCopy from gamecopy WHERE idGame=? AND id NOT IN (SELECT idGameCopy from ownership) LIMIT 1";
+    private static final String GET_AVAILABLE_COPY_ID_SQL = "SELECT id from gamecopy WHERE idGame=? AND id NOT IN (SELECT idGameCopy from ownership) LIMIT 1";
 
     @Override
     public void addCopy(int idGame, String key) throws DAOException {
