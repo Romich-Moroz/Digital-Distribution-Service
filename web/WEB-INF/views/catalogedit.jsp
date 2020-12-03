@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style><%@include file="/WEB-INF/css/w3.css"%></style>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="locale" var="loc" />
 
@@ -38,15 +39,18 @@
 
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
-    <cstm:cm expected="delsuccess" actual="${param.message}" message="${delsuc}"/>
-    <cstm:cm expected="delpartsuccess" actual="${param.message}" message="${delpart}"/>
-    <cstm:cm expected="delexception" actual="${param.message}" message="${delexc}"/>
-    <cstm:cm expected="addexception" actual="${param.message}" message="${addexc}"/>
-    <cstm:cm expected="addsuccess" actual="${param.message}" message="${addsuc}"/>
-    <cstm:cm expected="editexception" actual="${param.message}" message="${editexc}"/>
-    <cstm:cm expected="editsuccess" actual="${param.message}" message="${editsuc}"/>
-    <cstm:cm expected="addkeysexception" actual="${param.message}" message="${addkeysexc}"/>
-    <cstm:cm expected="addkeyssuccess" actual="${param.message}" message="${addkeyssuc}"/>
+    <h2 class="w3-text-white w3-center">
+        <cstm:cm expected="delsuccess" actual="${param.message}" message="${delsuc}"/>
+        <cstm:cm expected="delpartsuccess" actual="${param.message}" message="${delpart}"/>
+        <cstm:cm expected="delexception" actual="${param.message}" message="${delexc}"/>
+        <cstm:cm expected="addexception" actual="${param.message}" message="${addexc}"/>
+        <cstm:cm expected="addsuccess" actual="${param.message}" message="${addsuc}"/>
+        <cstm:cm expected="editexception" actual="${param.message}" message="${editexc}"/>
+        <cstm:cm expected="editsuccess" actual="${param.message}" message="${editsuc}"/>
+        <cstm:cm expected="addkeysexception" actual="${param.message}" message="${addkeysexc}"/>
+        <cstm:cm expected="addkeyssuccess" actual="${param.message}" message="${addkeyssuc}"/>
+    </h2>
+
 
     <div>
         <form method="post">

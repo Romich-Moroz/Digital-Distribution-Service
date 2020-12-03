@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style><%@include file="/WEB-INF/css/w3.css"%></style>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="locale" var="loc" />
 
@@ -25,60 +26,54 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
-    <div>
+    <h2 class="w3-text-white w3-center">
         <cstm:cm expected="delfromcartexception" actual="${param.message}" message="${delexc}"/>
         <cstm:cm expected="delfromcartsuccess" actual="${param.message}" message="${delsuc}"/>
-
-        <c:choose>
-            <c:when test="${cart != null}">
-                <c:set var="total" value="${0}"/>
-                <table>
+        <cstm:cm expected="true" actual="${cart == null}" message="${cartempty}"/>
+    </h2>
+    <div class="w3-container w3-center" style="width: 100%">
+        <c:if test="${cart != null}">
+            <c:set var="total" value="${0}"/>
+            <table class="w3-table w3-large w3-border w3-border-white w3-bordered" style="width: 30%; display: inline-block">
+                <colgroup>
+                    <col style="width:75%">
+                    <col style="width:25%">
+                </colgroup>
+                <tr>
+                    <th class="w3-text-white">${game}</th>
+                    <th class="w3-text-white">${price}</th>
+                </tr>
+                <c:forEach items="${cart}" var="game">
                     <tr>
-                        <th>${game}</th>
-                        <th>${price}</th>
+                        <td class="w3-text-white">${game.name}</td>
+                        <td class="w3-text-white">${game.price}$ <button class="w3-button w3-circle w3-text-white w3-red w3" onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">X</button></td>
+                        <c:set var="total" value="${total + game.price}" />
                     </tr>
-                    <c:forEach items="${cart}" var="game">
-                        <tr>
-                            <td>${game.name}</td>
-                            <td>${game.price}$</td>
-                            <td><button onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">${remove}</button></td>
-                            <c:set var="total" value="${total + game.price}" />
-                        </tr>
-                    </c:forEach>
-                </table>
+                </c:forEach>
                 <fmt:formatNumber var="formattedTotal" type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}" />
-                <c:out value="${sum}: ${formattedTotal}$"/>
-            </c:when>
-            <c:otherwise>
-                <c:out value="${cartempty}"/>
-            </c:otherwise>
-        </c:choose>
-
-        <br/><br/>
-
-        <form method="post">
-            <label>
-                ${card}:&nbsp;
-                <input type="text" name="cardNumb" required/>
-            </label>
-            <br/>
-            <label>
-                ${holder}:&nbsp;
-                <input type="text" name="name" required/>
-            </label>
-            <br/>
-            <label>
-                ${expdate}:&nbsp;
-                <input type="text" name="date" required/>
-            </label>
-            <br/>
-            <label>
-                ${CVV}:&nbsp;
-                <input type="text" name="security" required/>
-            </label>
-            <br/>
-            <button type="submit" formaction="controller?command=purchase">${purchase}</button>
-        </form>
+                <tr>
+                    <th class="w3-text-white">${sum}</th>
+                    <th class="w3-text-white">${formattedTotal}$</th>
+                </tr>
+            </table>
+            <br/><br/>
+            <div class="w3-container w3-large w3-border w3-border-white  w3-round-xxlarge" style="width: 30%; display: inline-block">
+                <div class="w3-center w3-text-white">
+                    <h2>${title}</h2>
+                </div>
+                <form method="post">
+                    <label class="w3-text-white">${card}</label>
+                    <input class="w3-input w3-border w3-round-large" type="text" name="cardNumb" required/><br/>
+                    <label class="w3-text-white">${holder}</label>
+                    <input class="w3-input w3-border w3-round-large" type="text" name="name" required/><br/>
+                    <label class="w3-text-white">${expdate}</label>
+                    <input class="w3-input w3-border w3-round-large" type="text" name="date" required/><br/>
+                    <label class="w3-text-white">${CVV}</label>
+                    <input class="w3-input w3-border w3-round-large" type="text" name="security" required/><br/>
+                    <button class="w3-btn w3-text-white w3-border w3-round-xlarge" style="width: 100%" type="submit" formaction="controller?command=purchase">${purchase}</button>
+                </form>
+            </div>
+        </c:if>
 
     </div>
     <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>

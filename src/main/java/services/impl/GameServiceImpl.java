@@ -16,34 +16,6 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     @Override
-    public List<Game> findByDeveloper(int idDeveloper) throws ServiceException {
-        DAOFactory factory = DAOFactory.getInstance();
-        GameDAO dao = factory.getGameDAO();
-
-        try {
-            return dao.findByDeveloper(idDeveloper);
-        }catch (DAOInvalidDataException e){
-            throw  new ServiceInvalidDataException(e);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public List<Game> findByGenre(int idGenre) throws ServiceException {
-        DAOFactory factory = DAOFactory.getInstance();
-        GameDAO dao = factory.getGameDAO();
-
-        try {
-            return dao.findByGenre(idGenre);
-        }catch (DAOInvalidDataException e){
-            throw  new ServiceInvalidDataException(e);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public List<Game> list(boolean sellingOnly) throws ServiceException {
         DAOFactory factory = DAOFactory.getInstance();
         GameDAO dao = factory.getGameDAO();

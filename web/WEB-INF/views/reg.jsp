@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style><%@include file="/WEB-INF/css/w3.css"%></style>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="locale" var="loc" />
 
@@ -19,23 +20,32 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <h2 class="w3-text-white w3-center">
+        <cstm:cm expected="regexception" actual="${param.message}" message="${regexc}"/>
+        <cstm:cm expected="regexists" actual="${param.message}" message="${regexi}"/>
+    </h2>
 
-    <cstm:cm expected="regexception" actual="${param.message}" message="${regexc}"/>
-    <cstm:cm expected="regexists" actual="${param.message}" message="${regexi}"/>
 
-    <form method="post" action="controller?command=register">
-        <label>${login}:
-            <input type="text" name="login" required><br />
-        </label>
+    <br/>
+    <div class="w3-display-middle w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%">
+        <div class="w3-center w3-text-white">
+            <h2>${title}</h2>
+        </div>
+        <form method="post" action="controller?command=register">
+            <label class="w3-text-white">${login}</label>
+            <input class="w3-input w3-border w3-round-large" type="text" name="login" required>
+            <br/>
+            <label class="w3-text-white">${email}</label>
+            <input class="w3-input w3-border w3-round-large" type="text" name="email" required>
+            <br/>
+            <label class="w3-text-white">${pass}</label>
+            <input class="w3-input w3-border w3-round-large" type="password" name="pass" required>
+            <br/>
+            <button class="w3-btn w3-text-white w3-border w3-round-xlarge" style="width: 100%" type="submit">${btn}</button>
+        </form>
+    </div>
+    <br/>
 
-        <label>${email}:
-            <input type="text" name="email" required><br />
-        </label>
-        <label>${pass}:
-            <input type="password" name="pass" required><br />
-        </label>
-        <button type="submit">${btn}</button>
-    </form>
 
     <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
 </body>

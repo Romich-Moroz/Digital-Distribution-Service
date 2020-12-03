@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style><%@include file="/WEB-INF/css/w3.css"%></style>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="locale" var="loc" />
 
@@ -22,10 +23,13 @@
     <title>${title}</title>
 </head>
 <body>
-    <!-- header & navigation -->
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
-    <cstm:cm expected="addtocartexception" actual="${param.message}" message="${addcartexc}"/>
-    <cstm:cm expected="addtocartsuccess" actual="${param.message}" message="${addcartsuc}"/>
+
+    <h2 class="w3-text-white w3-center">
+        <cstm:cm expected="addtocartexception" actual="${param.message}" message="${addcartexc}"/>
+        <cstm:cm expected="addtocartsuccess" actual="${param.message}" message="${addcartsuc}"/>
+    </h2>
+
 
     <div>
         <form method="post">

@@ -6,8 +6,6 @@ import services.exceptions.ServiceException;
 import java.util.List;
 
 public interface GameService {
-    List<Game> findByDeveloper(int idDeveloper) throws ServiceException;
-    List<Game> findByGenre(int idGenre) throws ServiceException;
     List<Game> list(boolean sellingOnly) throws ServiceException;
     List<Game> findByName(String name) throws ServiceException;
     void addGame(int idGenre,int idDeveloper, String name, String description, float price) throws ServiceException;
