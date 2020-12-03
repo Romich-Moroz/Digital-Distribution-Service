@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html>
 <head>
@@ -19,12 +20,9 @@
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
-    <c:if test="${param.message == 'regexception'}">
-        <h2>${regexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'regexists'}">
-        <h2>${regexi}</h2>
-    </c:if>
+    <cstm:cm expected="regexception" actual="${param.message}" message="${regexc}"/>
+    <cstm:cm expected="regexists" actual="${param.message}" message="${regexi}"/>
+
     <form method="post" action="controller?command=register">
         <label>${login}:
             <input type="text" name="login" required><br />

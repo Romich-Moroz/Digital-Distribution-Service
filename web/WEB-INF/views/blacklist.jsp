@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -22,21 +23,11 @@
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
-    <c:if test="${param.message == 'delsuccess'}">
-        <h2>${delsuc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'delexception'}">
-        <h2>${delexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addexception'}">
-        <h2>${addexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addsuccess'}">
-        <h2>${addsuc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'error'}">
-        <h2>${error}</h2>
-    </c:if>
+    <cstm:cm expected="delsuccess" actual="${param.message}" message="${delsuc}"/>
+    <cstm:cm expected="delexception" actual="${param.message}" message="${delexc}"/>
+    <cstm:cm expected="addexception" actual="${param.message}" message="${addexc}"/>
+    <cstm:cm expected="addsuccess" actual="${param.message}" message="${addsuc}"/>
+    <cstm:cm expected="error" actual="${param.message}" message="${error}"/>
 
     <div>
         <form method="post">

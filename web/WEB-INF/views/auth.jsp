@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,16 +22,10 @@
 <body>
 
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <cstm:cm expected="logexception" actual="${param.message}" message="${logexc}"/>
+    <cstm:cm expected="logerror" actual="${param.message}" message="${logerr}"/>
+    <cstm:cm expected="logbanned" actual="${param.message}" message="${logban}"/>
 
-    <c:if test="${param.message == 'logexception'}">
-        <h2>${logexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'logerror'}">
-        <h2>${logerr}</h2>
-    </c:if>
-    <c:if test="${param.message == 'logbanned'}">
-        <h2>${logban}</h2>
-    </c:if>
     <form method="post" action="controller?command=authorize">
         <label>${login}:
             <input type="text" name="login" required><br/>

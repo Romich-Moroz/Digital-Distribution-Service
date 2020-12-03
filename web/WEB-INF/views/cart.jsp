@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -25,12 +26,8 @@
 <body>
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
     <div>
-        <c:if test="${param.message == 'delfromcartexception'}">
-            <h2>${delexc}</h2>
-        </c:if>
-        <c:if test="${param.message == 'delfromcartsuccess'}">
-            <h2>${delsuc}</h2>
-        </c:if>
+        <cstm:cm expected="delfromcartexception" actual="${param.message}" message="${delexc}"/>
+        <cstm:cm expected="delfromcartsuccess" actual="${param.message}" message="${delsuc}"/>
 
         <c:choose>
             <c:when test="${cart != null}">

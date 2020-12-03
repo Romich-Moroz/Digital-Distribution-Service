@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -23,13 +24,10 @@
 <body>
     <!-- header & navigation -->
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <cstm:cm expected="addtocartexception" actual="${param.message}" message="${addcartexc}"/>
+    <cstm:cm expected="addtocartsuccess" actual="${param.message}" message="${addcartsuc}"/>
+
     <div>
-        <c:if test="${param.message == 'addtocartexception'}">
-            <h2>${addcartexc}</h2>
-        </c:if>
-        <c:if test="${param.message == 'addtocartsuccess'}">
-            <h2>${addcartsuc}</h2>
-        </c:if>
         <form method="post">
             <input type="text" name="gameName" placeholder="${searchplc}" value="${searchRequest}"/>
             <button type="submit" formaction="controller?command=search">${searchbtn}</button>

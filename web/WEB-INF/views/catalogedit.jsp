@@ -1,6 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/conditionalMessage.tld" prefix="cstm" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -37,33 +38,15 @@
 
     <jsp:include page="/WEB-INF/views/templates/header.jsp" />
 
-    <c:if test="${param.message == 'delsuccess'}">
-        <h2>${delsuc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'delpartsuccess'}">
-        <h2>${delpart}</h2>
-    </c:if>
-    <c:if test="${param.message == 'delexception'}">
-        <h2>${delexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addexception'}">
-        <h2>${addexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addsuccess'}">
-        <h2>${addsuc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'editexception'}">
-        <h2>${editexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'editsuccess'}">
-        <h2>${editsuc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addkeysexception'}">
-        <h2>${addkeysexc}</h2>
-    </c:if>
-    <c:if test="${param.message == 'addkeyssuccess'}">
-        <h2>${addkeyssuc}</h2>
-    </c:if>
+    <cstm:cm expected="delsuccess" actual="${param.message}" message="${delsuc}"/>
+    <cstm:cm expected="delpartsuccess" actual="${param.message}" message="${delpart}"/>
+    <cstm:cm expected="delexception" actual="${param.message}" message="${delexc}"/>
+    <cstm:cm expected="addexception" actual="${param.message}" message="${addexc}"/>
+    <cstm:cm expected="addsuccess" actual="${param.message}" message="${addsuc}"/>
+    <cstm:cm expected="editexception" actual="${param.message}" message="${editexc}"/>
+    <cstm:cm expected="editsuccess" actual="${param.message}" message="${editsuc}"/>
+    <cstm:cm expected="addkeysexception" actual="${param.message}" message="${addkeysexc}"/>
+    <cstm:cm expected="addkeyssuccess" actual="${param.message}" message="${addkeyssuc}"/>
 
     <div>
         <form method="post">
@@ -75,16 +58,19 @@
                     </c:forEach>
                 </select>
             </label>
-            <button type="post" formaction="controller?command=deletegame">${delete}</button>
+            <button type="submit" formaction="controller?command=deletegame">${delete}</button>
         </form>
 
         <form method="post">
-            ${create}
-            <select name="games">
-                <c:forEach items="${gameslist}" var="game">
-                    <option value="${game.id}">${game.name}</option>
-                </c:forEach>
-            </select><br/>
+            <label>
+                ${create}
+                <select name="games">
+                    <c:forEach items="${gameslist}" var="game">
+                        <option value="${game.id}">${game.name}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <br/>
             <label>
                 ${developer}&nbsp;
                 <select name="developers">
@@ -123,12 +109,15 @@
         </form>
 
         <form method="post">
-            ${addkeyslbl}
-            <select name="games">
-                <c:forEach items="${gameslist}" var="game">
-                    <option value="${game.id}">${game.name}</option>
-                </c:forEach>
-            </select><br/>
+            <label>
+                ${addkeyslbl}
+                <select name="games">
+                    <c:forEach items="${gameslist}" var="game">
+                        <option value="${game.id}">${game.name}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <br/>
             <label>
                 <textarea rows="10" cols="30" name="gameKeys" placeholder="${addkeysplc}" required></textarea>&nbsp;
             </label><br/>
