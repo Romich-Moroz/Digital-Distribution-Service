@@ -19,7 +19,7 @@ public class AddToCartCommand implements Command {
     private static final String CART_SESSION_ATTRIBUTE = "cart";
     private static final String REDIRECT_COMMAND_SUCCESS = "controller?command=storeredirect&message=addtocartsuccess";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idGame = parseInt(request.getParameter(REQUEST_PARAMETER_SELECTED_GAME));
         HttpSession session = request.getSession();
         for(Game game : (List<Game>)session.getAttribute(CATALOG_PAGE_SESSION_ATTRIBUTE)) {

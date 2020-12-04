@@ -21,7 +21,7 @@ public class PurchaseCommand implements Command {
     private static final String REDIRECT_COMMAND_EXCEPTION = "controller?command=gamesredirect&message=purexception";
     private static final String REDIRECT_COMMAND_SUCCESS = "controller?command=gamesredirect&message=pursuccess";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         List<Game> cartGames = (List<Game>)session.getAttribute(CART_SESSION_ATTRIBUTE);
         ServiceFactory factory = ServiceFactory.getInstance();

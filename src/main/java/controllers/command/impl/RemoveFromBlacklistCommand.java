@@ -17,7 +17,7 @@ public class RemoveFromBlacklistCommand implements Command {
     private static final String REDIRECT_COMMAND_SUCCESS = "controller?command=blacklistredirect&message=delsuccess";
     private static final String REDIRECT_COMMAND_ERROR = "controller?command=blacklistredirect&message=error";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter(REQUEST_PARAMETER_BAN_LOGIN);
         BlacklistService service = new ServiceFactory().getInstance().getBlacklistService();
         try {

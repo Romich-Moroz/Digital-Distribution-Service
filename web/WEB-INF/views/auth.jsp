@@ -21,33 +21,39 @@
     <title>${title}</title>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <header>
+        <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
 
     <h2 class="w3-text-white w3-center">
-        <cstm:cm expected="logexception" actual="${param.message}" message="${logexc}"/>
-        <cstm:cm expected="logerror" actual="${param.message}" message="${logerr}"/>
-        <cstm:cm expected="logbanned" actual="${param.message}" message="${logban}"/>
+        <cstm:cm condition="${param.message == 'logexception'}" message="${logexc}"/>
+        <cstm:cm condition="${param.message == 'logerror'}" message="${logerr}"/>
+        <cstm:cm condition="${param.message == 'logbanned'}" message="${logban}"/>
     </h2>
 
 
     <br/>
-    <div class="w3-display-middle w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%">
-        <div class="w3-center w3-text-white">
-            <h2>${title}</h2>
+    <div class="content w3-center" style="width: 100%">
+        <div class="w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%; display: inline-block">
+            <div class="w3-center w3-text-white">
+                <h2>${title}</h2>
+            </div>
+            <form method="post" action="controller?command=authorize">
+                <label class="w3-text-white">${login}</label>
+                <input class="w3-input w3-border w3-round-large" type="text" name="login" required/>
+                <br/>
+                <label class="w3-text-white">${pass}</label>
+                <input class="w3-input w3-border w3-round-large" type="password" name="pass" required/>
+                <br/>
+                <button class="w3-btn w3-text-white w3-border w3-round-xlarge" type="button" onclick="location.href='controller?command=regredirect'">${regbtn}</button>
+                <button class="w3-btn w3-text-white w3-border w3-round-xlarge w3-right" style="width: 65%">${logbtn}</button>
+            </form>
         </div>
-        <form method="post" action="controller?command=authorize">
-            <label class="w3-text-white">${login}</label>
-            <input class="w3-input w3-border w3-round-large" type="text" name="login" required/>
-            <br/>
-            <label class="w3-text-white">${pass}</label>
-            <input class="w3-input w3-border w3-round-large" type="password" name="pass" required/>
-            <br/>
-            <button class="w3-btn w3-text-white w3-border w3-round-xlarge" type="button" onclick="location.href='controller?command=regredirect'">${regbtn}</button>
-            <button class="w3-btn w3-text-white w3-border w3-round-xlarge w3-right" style="width: 65%">${logbtn}</button>
-        </form>
     </div>
-    <br/>
 
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    <br/>
+    <footer>
+        <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
 </body>
 </html>

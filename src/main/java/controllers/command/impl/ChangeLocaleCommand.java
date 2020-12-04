@@ -15,7 +15,7 @@ public class ChangeLocaleCommand implements Command {
     private static final String LOCALE_REQUEST_ATTRIBUTE = "locale";
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         session.setAttribute(LOCALE_SESSION_ATTRIBUTE, request.getParameter(LOCALE_REQUEST_ATTRIBUTE));
 

@@ -31,7 +31,7 @@ public class Controller extends HttpServlet {
     }
 
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String commandName = request.getParameter(PARAMETER_COMMAND);
         Command command = provider.getCommand(commandName);
         try {

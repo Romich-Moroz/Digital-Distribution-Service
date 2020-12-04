@@ -21,7 +21,7 @@ public class Ownership implements Serializable {
     }
 
     public void setGameCopy(GameCopy idGameCopy) {
-        this.gameCopy = gameCopy;
+        this.gameCopy = idGameCopy;
     }
 
     public Timestamp getTimestamp() {

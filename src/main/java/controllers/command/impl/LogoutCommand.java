@@ -15,7 +15,7 @@ public class LogoutCommand implements Command {
     private static final String REQUEST_PARAMETER_DEVELOPERS = "developerslist";
     private static final String SEARCH_SESSION_ATTRIBUTE = "searchRequest";
     private static final String CATALOG_PAGE_SESSION_ATTRIBUTE = "catalog";
-    private static final String CART_SESSION_ATTRIBUTE = "catalog";
+    private static final String CART_SESSION_ATTRIBUTE = "cart";
     private static final String GAMES_SESSION_ATTRIBUTE = "ownedgames";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

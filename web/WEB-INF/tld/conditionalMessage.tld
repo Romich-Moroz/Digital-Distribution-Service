@@ -11,12 +11,7 @@
         <tag-class>tagHandlers.ConditionalMessageTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
-            <name>expected</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>actual</name>
+            <name>condition</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>

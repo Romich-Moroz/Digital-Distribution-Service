@@ -23,38 +23,67 @@
     <title>${title}</title>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <header>
+        <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
 
     <h2 class="w3-text-white w3-center">
-        <cstm:cm expected="addtocartexception" actual="${param.message}" message="${addcartexc}"/>
-        <cstm:cm expected="addtocartsuccess" actual="${param.message}" message="${addcartsuc}"/>
+        <cstm:cm condition="${param.message == 'addtocartexception'}" message="${addcartexc}"/>
+        <cstm:cm condition="${param.message == 'addtocartsuccess'}" message="${addcartsuc}"/>
     </h2>
 
-
-    <div>
-        <form method="post">
-            <input type="text" name="gameName" placeholder="${searchplc}" value="${searchRequest}"/>
-            <button type="submit" formaction="controller?command=search">${searchbtn}</button>
-        </form>
-        <c:forEach items="${catalog}" var="game">
-            <div>
-                <c:out value="${gamename}: ${game.name}"/><br/>
-                <c:out value="${developer}: ${game.developer.developer}"/><br/>
-                <c:out value="${genre}: ${game.genre.genre}"/><br/>
-                <c:out value="${price}: ${game.price}$"/><br/>
-                <c:out value="${desc}: ${game.description}"/><br/>
-                <c:choose>
-                    <c:when test="${user == null}">
-                        <button onclick="location.href='controller?command=authredirect'" name="addtocart">${addcartbtn}</button><br/>
-                    </c:when>
-                    <c:otherwise>
-                        <button onclick="location.href='controller?command=addtocart&idGame=${game.id}'" name="addtocart">${addcartbtn}</button><br/>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </c:forEach>
+    <div class="content w3-center" style="width: 100%">
+        <div class="w3-padding w3-large " style="width:50%; display: inline-block">
+            <form method="post">
+                <input class="w3-input w3-border w3-round-large" style="display: inline-block; width: 88%" type="text" name="gameName" placeholder="${searchplc}" value="${searchRequest}"/>
+                <button class="w3-btn w3-text-white w3-border w3-round-xlarge" type="submit" formaction="controller?command=search">${searchbtn}</button>
+            </form>
+            <c:forEach items="${catalog}" var="game">
+                <div class="w3-padding w3-border-bottom w3-border-white" style="width: 100%; display: inline-block">
+                    <div style="width: 40%; display: inline-block" class="w3-left">
+                        <table class="w3-table w3-large w3-bordered w3-border-white w3-text-white">
+                            <tr>
+                                <th>${gamename}</th>
+                                <td>${game.name}</td>
+                            </tr>
+                            <tr>
+                                <th>${developer}</th>
+                                <td>${game.developer.developer}</td>
+                            </tr>
+                            <tr>
+                                <th>${genre}</th>
+                                <td>${game.genre.genre}</td>
+                            </tr>
+                            <tr>
+                                <th>${price}</th>
+                                <td>${game.price}$</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 60%; display: inline-block" class="w3-center">
+                        <div style="height: 80%">
+                            <label class="w3-text-white">${desc}</label>
+                            <p class="w3-text-white">${game.description}</p>
+                        </div>
+                        <div style="height: 20%">
+                            <c:choose>
+                                <c:when test="${user == null}">
+                                    <button class="w3-btn w3-text-white w3-border w3-round-xlarge" onclick="location.href='controller?command=authredirect'" name="addtocart">${addcartbtn}</button><br/>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="w3-btn w3-text-white w3-border w3-round-xlarge" onclick="location.href='controller?command=addtocart&idGame=${game.id}'" name="addtocart">${addcartbtn}</button><br/>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+            </c:forEach>
+        </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    <footer>
+        <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
 </body>
 </html>

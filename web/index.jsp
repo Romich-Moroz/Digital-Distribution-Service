@@ -21,22 +21,29 @@
 
     <title>${title}</title>
   </head>
-  <body style>
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+  <body>
+    <header>
+      <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
 
-    <div>
-      <h2>${welcome}</h2>
-      <ul>
-        <li>${feat1}</li>
-        <li>${feat2}</li>
-        <li>${feat3}</li>
-        <li>${feat4}</li>
-        <li>${feat5}</li>
-        <li>${feat6}</li>
-      </ul>
+    <div class="content w3-center" style="width: 100%">
+      <div class="w3-large" style="width: 30%; display: inline-block">
+        <h2 class="w3-text-white">${welcome}</h2>
+        <ul class="w3-text-white w3-ul">
+          <li>${feat1}</li>
+          <li>${feat2}</li>
+          <li>${feat3}</li>
+          <li>${feat4}</li>
+          <li>${feat5}</li>
+          <li>${feat6}</li>
+        </ul>
+        <h2 class="w3-text-white w3-center">${login}</h2>
+      </div>
     </div>
-    <h2>${login}</h2>
 
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+
+    <footer>
+      <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
   </body>
 </html>

@@ -2,7 +2,6 @@ package controllers.command.impl;
 
 import controllers.command.Command;
 import services.BlacklistService;
-import services.GameService;
 import services.ServiceFactory;
 import services.exceptions.ServiceException;
 import services.exceptions.ServiceForeignDependencyException;
@@ -12,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
-
 public class AddToBlacklistCommand implements Command {
     private static final String REQUEST_PARAMETER_BAN_LOGIN = "login";
     private static final String REQUEST_PARAMETER_BAN_REASON = "reason";
@@ -22,7 +18,7 @@ public class AddToBlacklistCommand implements Command {
     private static final String REDIRECT_COMMAND_SUCCESS = "controller?command=blacklistredirect&message=addsuccess";
     private static final String REDIRECT_COMMAND_ERROR = "controller?command=blacklistredirect&message=error";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter(REQUEST_PARAMETER_BAN_LOGIN);
         String reason = request.getParameter(REQUEST_PARAMETER_BAN_REASON);
         BlacklistService service = new ServiceFactory().getInstance().getBlacklistService();

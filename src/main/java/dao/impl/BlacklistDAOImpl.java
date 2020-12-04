@@ -1,10 +1,8 @@
 package dao.impl;
 
-import beans.Developer;
 import dao.BlacklistDAO;
 import dao.exceptions.DAOException;
 import dao.exceptions.DAOForeignDependencyException;
-import dao.exceptions.DAONotFoundException;
 import dao.impl.connection.ConnectionPool;
 import dao.impl.connection.ConnectionPoolException;
 
@@ -12,8 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BlacklistDAOImpl implements BlacklistDAO {
     private static final String ADD_USER_SQL = "INSERT INTO blacklist (idUser,reason) SELECT users.id,? FROM users WHERE login=?";

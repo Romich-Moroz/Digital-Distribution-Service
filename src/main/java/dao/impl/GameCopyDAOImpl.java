@@ -1,6 +1,5 @@
 package dao.impl;
 
-import beans.GameCopy;
 import dao.GameCopyDAO;
 import dao.exceptions.DAOException;
 import dao.exceptions.DAONotFoundException;

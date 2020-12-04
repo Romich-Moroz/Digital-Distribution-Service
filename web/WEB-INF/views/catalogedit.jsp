@@ -36,99 +36,95 @@
     <title>${title}</title>
 </head>
 <body>
-
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <header>
+        <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
 
     <h2 class="w3-text-white w3-center">
-        <cstm:cm expected="delsuccess" actual="${param.message}" message="${delsuc}"/>
-        <cstm:cm expected="delpartsuccess" actual="${param.message}" message="${delpart}"/>
-        <cstm:cm expected="delexception" actual="${param.message}" message="${delexc}"/>
-        <cstm:cm expected="addexception" actual="${param.message}" message="${addexc}"/>
-        <cstm:cm expected="addsuccess" actual="${param.message}" message="${addsuc}"/>
-        <cstm:cm expected="editexception" actual="${param.message}" message="${editexc}"/>
-        <cstm:cm expected="editsuccess" actual="${param.message}" message="${editsuc}"/>
-        <cstm:cm expected="addkeysexception" actual="${param.message}" message="${addkeysexc}"/>
-        <cstm:cm expected="addkeyssuccess" actual="${param.message}" message="${addkeyssuc}"/>
+        <cstm:cm condition="${param.message == 'delsuccess'}" message="${delsuc}"/>
+        <cstm:cm condition="${param.message == 'delpartsuccess'}" message="${delpart}"/>
+        <cstm:cm condition="${param.message == 'delexception'}" message="${delexc}"/>
+        <cstm:cm condition="${param.message == 'addexception'}" message="${addexc}"/>
+        <cstm:cm condition="${param.message == 'addsuccess'}" message="${addsuc}"/>
+        <cstm:cm condition="${param.message == 'editexception'}" message="${editexc}"/>
+        <cstm:cm condition="${param.message == 'editsuccess'}" message="${editsuc}"/>
+        <cstm:cm condition="${param.message == 'addkeysexception'}" message="${addkeysexc}"/>
+        <cstm:cm condition="${param.message == 'addkeyssuccess'}" message="${addkeyssuc}"/>
     </h2>
 
+    <div class="w3-center content" style="width: 100%">
+        <div class="w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%; display: inline-block">
+            <div class="w3-center w3-text-white">
+                <h2>${select}</h2>
+            </div>
+            <form method="post">
+                <select class="w3-select" name="games">
+                    <c:forEach items="${gameslist}" var="game">
+                        <option value="${game.id}">${game.name}</option>
+                    </c:forEach>
+                </select><br/><br/>
+                <button style="width: 100%" class="w3-btn w3-text-white w3-border w3-round-xlarge w3-right" type="submit" formaction="controller?command=deletegame">${delete}</button>
+            </form>
+        </div>
+        <br/><br/>
 
-    <div>
-        <form method="post">
-            <label>
-                ${select}:&nbsp;
-                <select name="games">
+        <div class="w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%; display: inline-block">
+            <div class="w3-center w3-text-white">
+                <h2>${create}</h2>
+            </div>
+            <form method="post">
+
+                <select class="w3-select" name="games">
                     <c:forEach items="${gameslist}" var="game">
                         <option value="${game.id}">${game.name}</option>
                     </c:forEach>
                 </select>
-            </label>
-            <button type="submit" formaction="controller?command=deletegame">${delete}</button>
-        </form>
 
-        <form method="post">
-            <label>
-                ${create}
-                <select name="games">
-                    <c:forEach items="${gameslist}" var="game">
-                        <option value="${game.id}">${game.name}</option>
-                    </c:forEach>
-                </select>
-            </label>
-            <br/>
-            <label>
-                ${developer}&nbsp;
-                <select name="developers">
+                <label class="w3-text-white">${developer}</label>
+
+                <select class="w3-select" name="developers">
                     <c:forEach items="${developerslist}" var="developer">
                         <option value="${developer.id}">${developer.developer}</option>
                     </c:forEach>
                 </select>
-            </label>
-            <br/>
-            <label>
-                ${genre}&nbsp;
-                <select name="genres">
+                <label class="w3-text-white">${genre}</label>
+                <select class="w3-select" name="genres">
                     <c:forEach items="${genreslist}" var="genre">
                         <option value="${genre.id}">${genre.genre}</option>
                     </c:forEach>
                 </select>
-            </label>
-            <br/>
-            <label>
-                ${name}&nbsp;
-                <input type="text" name="gameName" required/>
-            </label>
-            <br/>
-            <label>
-                ${desc}&nbsp;
-                <input type="text" name="gameDesc" required/>
-            </label>
-            <br/>
-            <label>
-                ${price}&nbsp;
-                <input type="text" name="gamePrice" required/>
-            </label>
-            <br/>
-            <button type="submit" formaction="controller?command=addgame">${add}</button>
-            <button type="submit" formaction="controller?command=editgame">${edit}</button>
-        </form>
 
-        <form method="post">
-            <label>
-                ${addkeyslbl}
-                <select name="games">
+                <label class="w3-text-white">${name}</label>
+                <input class="w3-input w3-border w3-round-large" type="text" name="gameName" required/>
+                <label class="w3-text-white">${desc}</label>
+                <textarea style="width: 100%" class="w3-text" rows="10" cols="30" name="gameDesc" required></textarea>
+                <label class="w3-text-white">${price}</label>
+                <input class="w3-input w3-border w3-round-large" type="text" name="gamePrice" required/><br/>
+                <button style="width: 45%" class="w3-btn w3-left w3-text-white w3-border w3-round-xlarge" type="submit" formaction="controller?command=addgame">${add}</button>
+                <button style="width: 45%" class="w3-btn w3-right w3-text-white w3-border w3-round-xlarge" type="submit" formaction="controller?command=editgame">${edit}</button>
+            </form>
+        </div>
+        <br/><br/>
+        <div class="w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%; display: inline-block">
+            <div class="w3-center w3-text-white">
+                <h2>${addkeyslbl}</h2>
+            </div>
+            <form method="post">
+                <select class="w3-select" name="games">
                     <c:forEach items="${gameslist}" var="game">
                         <option value="${game.id}">${game.name}</option>
                     </c:forEach>
                 </select>
-            </label>
-            <br/>
-            <label>
-                <textarea rows="10" cols="30" name="gameKeys" placeholder="${addkeysplc}" required></textarea>&nbsp;
-            </label><br/>
-            <button type="submit" formaction="controller?command=addKeys">${addkeysbtn}</button>
-        </form>
+                <br/><br/>
+                <textarea style="width: 100%" class="w3-text" rows="10" cols="30" name="gameKeys" placeholder="${addkeysplc}" required></textarea>&nbsp;
+                <br/>
+                <button style="width: 100%" class="w3-btn w3-text-white w3-border w3-round-xlarge" type="submit" formaction="controller?command=addKeys">${addkeysbtn}</button>
+            </form>
+        </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    <footer>
+        <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package services.impl;
 
-import beans.GameCopy;
 import dao.DAOFactory;
 import dao.GameCopyDAO;
 import dao.exceptions.DAOAlreadyExistsException;

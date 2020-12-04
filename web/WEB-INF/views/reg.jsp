@@ -19,34 +19,37 @@
     <title>${title}</title>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <header>
+        <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
     <h2 class="w3-text-white w3-center">
-        <cstm:cm expected="regexception" actual="${param.message}" message="${regexc}"/>
-        <cstm:cm expected="regexists" actual="${param.message}" message="${regexi}"/>
+        <cstm:cm condition="${param.message == 'regexception'}" message="${regexc}"/>
+        <cstm:cm condition="${param.message == 'regexists'}" message="${regexi}"/>
     </h2>
 
-
-    <br/>
-    <div class="w3-display-middle w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%">
-        <div class="w3-center w3-text-white">
-            <h2>${title}</h2>
+    <div class="content w3-center" style="width: 100%">
+        <div class="w3-padding w3-large w3-border w3-border-white  w3-round-xxlarge" style="width:30%; display: inline-block">
+            <div class="w3-center w3-text-white">
+                <h2>${title}</h2>
+            </div>
+            <form method="post" action="controller?command=register">
+                <label class="w3-text-white">${login}</label>
+                <input class="w3-input w3-border w3-round-large" type="text" name="login" required>
+                <br/>
+                <label class="w3-text-white">${email}</label>
+                <input class="w3-input w3-border w3-round-large" type="text" name="email" required>
+                <br/>
+                <label class="w3-text-white">${pass}</label>
+                <input class="w3-input w3-border w3-round-large" type="password" name="pass" required>
+                <br/>
+                <button class="w3-btn w3-text-white w3-border w3-round-xlarge" style="width: 100%" type="submit">${btn}</button>
+            </form>
         </div>
-        <form method="post" action="controller?command=register">
-            <label class="w3-text-white">${login}</label>
-            <input class="w3-input w3-border w3-round-large" type="text" name="login" required>
-            <br/>
-            <label class="w3-text-white">${email}</label>
-            <input class="w3-input w3-border w3-round-large" type="text" name="email" required>
-            <br/>
-            <label class="w3-text-white">${pass}</label>
-            <input class="w3-input w3-border w3-round-large" type="password" name="pass" required>
-            <br/>
-            <button class="w3-btn w3-text-white w3-border w3-round-xlarge" style="width: 100%" type="submit">${btn}</button>
-        </form>
     </div>
-    <br/>
 
 
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    <footer>
+        <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
 </body>
 </html>

@@ -1,21 +1,14 @@
 package tagHandlers;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
-import java.io.StringWriter;
 
 public class ConditionalMessageTag extends SimpleTagSupport {
-    private String expected;
-    private String actual;
+    private boolean condition;
     private String message;
 
-    public void setExpected(String expected) {
-        this.expected = expected;
-    }
-
-    public void setActual(String actual) {
-        this.actual = actual;
+    public void setCondition(Boolean condition) {
+        this.condition = condition;
     }
 
     public void setMessage(String message) {
@@ -24,7 +17,7 @@ public class ConditionalMessageTag extends SimpleTagSupport {
 
     @Override
     public void doTag() throws IOException {
-        if (expected.equals(actual)) {
+        if (condition) {
             getJspContext().getOut().println(message);
         }
     }

@@ -1,7 +1,6 @@
 package services.impl;
 
 import beans.OwnedGame;
-import beans.Ownership;
 import dao.DAOFactory;
 import dao.OwnershipDAO;
 import dao.exceptions.DAOException;

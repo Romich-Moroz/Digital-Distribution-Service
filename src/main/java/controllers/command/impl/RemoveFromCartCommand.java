@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -20,7 +19,7 @@ public class RemoveFromCartCommand implements Command {
     private static final String REDIRECT_COMMAND_SUCCESS = "controller?command=cartredirect&message=delfromcartsuccess";
     private static final String REDIRECT_COMMAND_SUCCESS_NO_MSG = "controller?command=cartredirect";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idGame = parseInt(request.getParameter(REQUEST_PARAMETER_SELECTED_GAME));
         HttpSession session = request.getSession();
         for(Game game : (List<Game>)session.getAttribute(CATALOG_PAGE_SESSION_ATTRIBUTE)) {

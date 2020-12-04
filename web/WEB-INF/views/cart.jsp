@@ -25,13 +25,15 @@
     <title>${title}</title>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    <header>
+        <jsp:include page="/WEB-INF/views/templates/header.jsp" />
+    </header>
     <h2 class="w3-text-white w3-center">
-        <cstm:cm expected="delfromcartexception" actual="${param.message}" message="${delexc}"/>
-        <cstm:cm expected="delfromcartsuccess" actual="${param.message}" message="${delsuc}"/>
-        <cstm:cm expected="true" actual="${cart == null}" message="${cartempty}"/>
+        <cstm:cm condition="${param.message == 'delfromcartexception'}" message="${delexc}"/>
+        <cstm:cm condition="${param.message == 'delfromcartsuccess'}" message="${delsuc}"/>
+        <cstm:cm condition="${cart == null}" message="${cartempty}"/>
     </h2>
-    <div class="w3-container w3-center" style="width: 100%">
+    <div class="content w3-center" style="width: 100%">
         <c:if test="${cart != null}">
             <c:set var="total" value="${0}"/>
             <table class="w3-table w3-large w3-border w3-border-white w3-bordered" style="width: 30%; display: inline-block">
@@ -46,7 +48,7 @@
                 <c:forEach items="${cart}" var="game">
                     <tr>
                         <td class="w3-text-white">${game.name}</td>
-                        <td class="w3-text-white">${game.price}$ <button class="w3-button w3-circle w3-text-white w3-red w3" onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">X</button></td>
+                        <td class="w3-text-white">${game.price}$ <button class="w3-button w3-circle w3-text-white w3-red w3" onclick="location.href='controller?command=delfromcart&idGame=${game.id}'">&times</button></td>
                         <c:set var="total" value="${total + game.price}" />
                     </tr>
                 </c:forEach>
@@ -74,8 +76,10 @@
                 </form>
             </div>
         </c:if>
-
     </div>
-    <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+
+    <footer>
+        <jsp:include page="/WEB-INF/views/templates/footer.jsp"/>
+    </footer>
 </body>
 </html>
